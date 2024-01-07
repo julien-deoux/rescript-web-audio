@@ -167,28 +167,6 @@ module AudioDestinationNode = {
   @get external getMaxChannelCount: (audioDestinationNode, float) => unit = "maxChannelCount"
 }
 
-module AudioParam = {
-  @get external getDefaultValue: audioParam => float = "defaultValue"
-  @get external getMaxValue: audioParam => float = "maxValue"
-  @get external getMinValue: audioParam => float = "minValue"
-  @get external getValue: audioParam => float = "value"
-  @set external setValue: (audioParam, float) => unit = "value"
-  @send external setValueAtTime: (audioParam, float, float) => unit = "setValueAtTime"
-}
-
-module BaseAudioContext = {
-  @get external getDestination: baseAudioContext<'a> => audioDestinationNode = "destination"
-  @get external getCurrentTime: baseAudioContext<'a> => float = "currentTime"
-  @send external createOscillator: baseAudioContext<'a> => oscillatorNode = "createOscillator"
-  @send external createGain: baseAudioContext<'a> => gainNode = "createGain"
-  @send
-  external onStateChange: (
-    baseAudioContext<'a>,
-    @as("statechange") _,
-    event<baseAudioContext<'a>> => unit,
-  ) => unit = "addEventListener"
-}
-
 module AudioNode = {
   @get external getContext: audioNode<'a> => audioContext = "context"
   @get external getNumberOfInputs: audioNode<'a> => int = "numberOfInputs"
@@ -223,6 +201,41 @@ module AudioNode = {
   ) => unit = "disconnect"
   @send
   external disconnectParam: (audioNode<'a>, audioParam, ~outputIndex: int=?) => unit = "disconnect"
+}
+
+module AudioParam = {
+  @get external getDefaultValue: audioParam => float = "defaultValue"
+  @get external getMaxValue: audioParam => float = "maxValue"
+  @get external getMinValue: audioParam => float = "minValue"
+  @get external getValue: audioParam => float = "value"
+  @set external setValue: (audioParam, float) => unit = "value"
+  @send external setValueAtTime: (audioParam, float, float) => audioParam = "setValueAtTime"
+  @send
+  external linearRampToValueAtTime: (audioParam, float, float) => audioParam =
+    "linearRampToValueAtTime"
+  @send
+  external exponentialRampToValueAtTime: (audioParam, float, float) => audioParam =
+    "exponentialRampToValueAtTime"
+  @send
+  external setTargetAtTime: (audioParam, float, float, float) => audioParam = "setTargetAtTime"
+  @send
+  external setValueCurveAtTime: (audioParam, array<float>, float, float) => audioParam =
+    "setValueCurveAtTime"
+  @send external cancelScheduledValues: (audioParam, float) => audioParam = "cancelScheduledValues"
+  @send external cancelAndHoldAtTime: (audioParam, float) => audioParam = "cancelAndHoldAtTime"
+}
+
+module BaseAudioContext = {
+  @get external getDestination: baseAudioContext<'a> => audioDestinationNode = "destination"
+  @get external getCurrentTime: baseAudioContext<'a> => float = "currentTime"
+  @send external createOscillator: baseAudioContext<'a> => oscillatorNode = "createOscillator"
+  @send external createGain: baseAudioContext<'a> => gainNode = "createGain"
+  @send
+  external onStateChange: (
+    baseAudioContext<'a>,
+    @as("statechange") _,
+    event<baseAudioContext<'a>> => unit,
+  ) => unit = "addEventListener"
 }
 
 module AudioScheduledSourceNode = {
