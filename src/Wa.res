@@ -137,14 +137,29 @@ module AudioContext = {
     | @as("interactive") Interactive
     | @as("playback") Playback
     | Preferred(float)
-  type sinkOptions = {@as("type") type_: [#none]}
-  @unboxed type sinkId = Id(string) | Options(sinkOptions)
+  type audioSinkInfo = {@as("type") type_: [#none]}
+  @unboxed type sinkId = Id(string) | Options(audioSinkInfo)
+  type audioTimestamp = {
+    contextTime: float,
+    performanceTime: float,
+  }
   type options = {
     latencyHint?: latencyHint,
     sampleRate?: float,
     sinkId?: sinkId,
   }
   @new external make: options => audioContext = "AudioContext"
+  @get external getBaseLatency: audioContext => float = "baseLatency"
+  @get external getOutputLatency: audioContext => float = "outputLatency"
+  @get external getSinkId: audioContext => sinkId = "sinkId"
+  @send external setSinkId: (audioContext, sinkId) => unit = "setSinkId"
+  @send external getOutputTimestamp: audioContext => audioTimestamp = "getOutputTimestamp"
+  @send external close: audioContext => unit = "close"
+  @send external resume: audioContext => unit = "resume"
+  @send external suspend: audioContext => unit = "suspend"
+  @send
+  external onSinkchange: (audioContext, @as("sinkchange") _, event<audioContext> => unit) => unit =
+    "addEventListener"
 }
 
 module AudioParam = {
