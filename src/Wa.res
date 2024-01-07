@@ -225,19 +225,6 @@ module AudioParam = {
   @send external cancelAndHoldAtTime: (audioParam, float) => audioParam = "cancelAndHoldAtTime"
 }
 
-module BaseAudioContext = {
-  @get external getDestination: baseAudioContext<'a> => audioDestinationNode = "destination"
-  @get external getCurrentTime: baseAudioContext<'a> => float = "currentTime"
-  @send external createOscillator: baseAudioContext<'a> => oscillatorNode = "createOscillator"
-  @send external createGain: baseAudioContext<'a> => gainNode = "createGain"
-  @send
-  external onStateChange: (
-    baseAudioContext<'a>,
-    @as("statechange") _,
-    event<baseAudioContext<'a>> => unit,
-  ) => unit = "addEventListener"
-}
-
 module AudioScheduledSourceNode = {
   @send external start: (audioScheduledSourceNode<'a>, ~when_: float=?) => unit = "start"
   @send external stop: (audioScheduledSourceNode<'a>, ~when_: float=?) => unit = "stop"
@@ -246,6 +233,26 @@ module AudioScheduledSourceNode = {
     audioScheduledSourceNode<'a>,
     @as("ended") _,
     event<audioScheduledSourceNode<'a>> => unit,
+  ) => unit = "addEventListener"
+}
+
+module BaseAudioContext = {
+  @get external getCurrentTime: baseAudioContext<'a> => float = "currentTime"
+  @get external getDestination: baseAudioContext<'a> => audioDestinationNode = "destination"
+  @get external getSampleRate: baseAudioContext<'a> => float = "sampleRate"
+  @get external getState: baseAudioContext<'a> => [#suspended | #running | #closed] = "state"
+  @send external createOscillator: baseAudioContext<'a> => oscillatorNode = "createOscillator"
+  @send external createGain: baseAudioContext<'a> => gainNode = "createGain"
+  @send
+  external decodeAudioData: (
+    baseAudioContext<'a>,
+    Js.TypedArray2.ArrayBuffer.t,
+  ) => promise<audioBuffer> = "decodeAudioData"
+  @send
+  external onStateChange: (
+    baseAudioContext<'a>,
+    @as("statechange") _,
+    event<baseAudioContext<'a>> => unit,
   ) => unit = "addEventListener"
 }
 
