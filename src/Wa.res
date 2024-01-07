@@ -4,12 +4,12 @@ type audioParam
 type audioNode<'a>
 type analyser
 type analyserNode = audioNode<analyser>
-type scheduledSource<'a>
-type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
 type bufferSource
 type audioBufferSourceNode = audioScheduledSourceNode<bufferSource>
 type destination
 type audioDestinationNode = audioNode<destination>
+type scheduledSource<'a>
+type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -160,6 +160,11 @@ module AudioContext = {
   @send
   external onSinkchange: (audioContext, @as("sinkchange") _, event<audioContext> => unit) => unit =
     "addEventListener"
+}
+
+module AudioDestinationNode = {
+  @get external getMaxChannelCount: audioDestinationNode => float = "maxChannelCount"
+  @get external getMaxChannelCount: (audioDestinationNode, float) => unit = "maxChannelCount"
 }
 
 module AudioParam = {
