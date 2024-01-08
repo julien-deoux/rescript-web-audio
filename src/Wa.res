@@ -14,6 +14,8 @@ type biquadFilter
 type biquadFilterNode = audioNode<biquadFilter>
 type channelMerger
 type channelMergerNode = audioNode<channelMerger>
+type channelSplitter
+type channelSplitterNode = audioNode<channelSplitter>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -312,6 +314,17 @@ module ChannelMergerNode = {
     channelInterpretation?: channelInterpretation,
   }
   @new external make: (audioContext, ~options: options=?) => channelMergerNode = "ChannelMergerNode"
+}
+
+module ChannelSplitterNode = {
+  type options = {
+    numberOfOutputs?: int,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new
+  external make: (audioContext, ~options: options=?) => channelSplitterNode = "ChannelSplitterNode"
 }
 
 module OscillatorNode = {
