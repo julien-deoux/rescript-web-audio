@@ -34,7 +34,7 @@ module AnalyserNode = {
     channelInterpretation?: channelInterpretation,
   }
   @new
-  external make: (audioContext, options) => analyserNode = "AnalyserNode"
+  external make: (audioContext, ~options: options=?) => analyserNode = "AnalyserNode"
   @get external getFftSize: analyserNode => fftSize = "fftSize"
   @set external setFftSize: (analyserNode, fftSize) => unit = "fftSize"
   @get external getFrequencyBinCount: analyserNode => int = "frequencyBinCount"
@@ -102,7 +102,9 @@ module AudioBufferSourceNode = {
     channelCountMode?: channelCountMode,
     channelInterpretation?: channelInterpretation,
   }
-  @new external make: (audioContext, options) => audioBufferSourceNode = "AudioBufferSourceNode"
+  @new
+  external make: (audioContext, ~options: options=?) => audioBufferSourceNode =
+    "AudioBufferSourceNode"
   @get external getBuffer: audioBufferSourceNode => option<audioBuffer> = "buffer"
   @set
   external setBuffer: (audioBufferSourceNode, option<audioBuffer>) => unit = "buffer"
@@ -264,7 +266,7 @@ module OscillatorNode = {
     frequency?: float,
   }
   @new
-  external make: (audioContext, options) => oscillatorNode = "OscillatorNode"
+  external make: (audioContext, ~options: options=?) => oscillatorNode = "OscillatorNode"
   @get external getType: oscillatorNode => type_ = "type"
   @set external setType: (oscillatorNode, type_) => unit = "type"
   @get external getDetune: oscillatorNode => audioParam = "detune"
@@ -278,7 +280,7 @@ module OscillatorNode = {
 
 module GainNode = {
   type options = {gain?: float}
-  @new external make: (audioContext, options) => gainNode = "GainNode"
+  @new external make: (audioContext, ~options: options=?) => gainNode = "GainNode"
   @get external getGain: gainNode => audioParam = "gain"
   @set external setGain: (gainNode, audioParam) => unit = "gain"
 }
