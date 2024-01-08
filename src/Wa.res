@@ -12,6 +12,8 @@ type scheduledSource<'a>
 type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
 type biquadFilter
 type biquadFilterNode = audioNode<biquadFilter>
+type channelMerger
+type channelMergerNode = audioNode<channelMerger>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -300,6 +302,16 @@ module BiquadFilterNode = {
     Js.TypedArray2.Float32Array.t,
     Js.TypedArray2.Float32Array.t,
   ) => unit = "biquadFilterNode"
+}
+
+module ChannelMergerNode = {
+  type options = {
+    numberOfInputs?: int,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => channelMergerNode = "ChannelMergerNode"
 }
 
 module OscillatorNode = {
