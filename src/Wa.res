@@ -10,6 +10,8 @@ type destination
 type audioDestinationNode = audioNode<destination>
 type scheduledSource<'a>
 type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
+type biquadFilter
+type biquadFilterNode = audioNode<biquadFilter>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -256,6 +258,48 @@ module BaseAudioContext = {
     @as("statechange") _,
     event<baseAudioContext<'a>> => unit,
   ) => unit = "addEventListener"
+}
+
+module BiquadFilterNode = {
+  type type_ = [
+    | #lowpass
+    | #highpass
+    | #bandpass
+    | #lowshelf
+    | #highshelf
+    | #peaking
+    | #notch
+    | #allpass
+  ]
+  type options = {
+    q?: float,
+    detune?: float,
+    frequency?: float,
+    gain?: float,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => biquadFilterNode = "BiquadFilterNode"
+  @get
+  external getFrequency: biquadFilterNode => audioParam = "frequency"
+  @set
+  external setFrequency: (biquadFilterNode, audioParam) => unit = "frequency"
+  @get external getDetune: biquadFilterNode => audioParam = "detune"
+  @set
+  external setDetune: (biquadFilterNode, audioParam) => unit = "detune"
+  @get external getQ: biquadFilterNode => audioParam = "Q"
+  @set external setQ: (biquadFilterNode, audioParam) => unit = "Q"
+  @get external getType: biquadFilterNode => type_ = "type"
+  @set external setType: (biquadFilterNode, type_) => unit = "type"
+  @get external getGain: biquadFilterNode => audioParam = "gain"
+  @set external setGain: (biquadFilterNode, audioParam) => unit = "gain"
+  @send
+  external getFrequencyResponse: (
+    Js.TypedArray2.Float32Array.t,
+    Js.TypedArray2.Float32Array.t,
+    Js.TypedArray2.Float32Array.t,
+  ) => unit = "biquadFilterNode"
 }
 
 module OscillatorNode = {
