@@ -4,12 +4,12 @@ type audioParam
 type audioNode<'a>
 type analyser
 type analyserNode = audioNode<analyser>
+type scheduledSource<'a>
+type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
 type bufferSource
 type audioBufferSourceNode = audioScheduledSourceNode<bufferSource>
 type destination
 type audioDestinationNode = audioNode<destination>
-type scheduledSource<'a>
-type audioScheduledSourceNode<'a> = audioNode<scheduledSource<'a>>
 type biquadFilter
 type biquadFilterNode = audioNode<biquadFilter>
 type channelMerger
@@ -172,7 +172,7 @@ module AudioContext = {
 
 module AudioDestinationNode = {
   @get external getMaxChannelCount: audioDestinationNode => float = "maxChannelCount"
-  @get external getMaxChannelCount: (audioDestinationNode, float) => unit = "maxChannelCount"
+  @set external setMaxChannelCount: (audioDestinationNode, float) => unit = "maxChannelCount"
 }
 
 module AudioNode = {
