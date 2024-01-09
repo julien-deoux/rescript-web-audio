@@ -16,6 +16,8 @@ type channelMerger
 type channelMergerNode = audioNode<channelMerger>
 type channelSplitter
 type channelSplitterNode = audioNode<channelSplitter>
+type constantSource
+type constantSourceNode = audioScheduledSourceNode<constantSource>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -325,6 +327,13 @@ module ChannelSplitterNode = {
   }
   @new
   external make: (audioContext, ~options: options=?) => channelSplitterNode = "ChannelSplitterNode"
+}
+
+module ConstantSourceNode = {
+  type options = {offset?: float}
+  @new
+  external make: (audioContext, ~options: options=?) => constantSourceNode = "ConstantSourceNode"
+  @get external getOffset: constantSourceNode => audioParam = "offset"
 }
 
 module OscillatorNode = {
