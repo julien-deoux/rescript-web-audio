@@ -20,6 +20,8 @@ type constantSource
 type constantSourceNode = audioScheduledSourceNode<constantSource>
 type convolver
 type convolverNode = audioNode<convolver>
+type delay
+type delayNode = audioNode<delay>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -35,8 +37,6 @@ type channelInterpretation = [#speakers | #discrete]
 module AnalyserNode = {
   type fftSize = [#32 | #64 | #128 | #256 | #512 | #1024 | #2048 | #4096 | #8192 | #16384 | #32768]
   type options = {
-    fftSize?: fftSize,
-    minDecibels?: float,
     maxDecibels?: float,
     smoothingTimeConstant?: float,
     channelCount?: int,
@@ -352,6 +352,18 @@ module ConvolverNode = {
   @set external setBuffer: (convolverNode, audioBuffer) => unit = "buffer"
   @get external getNormalize: convolverNode => bool = "normalize"
   @set external setNormalize: (convolverNode, bool) => unit = "normalize"
+}
+
+module DelayNode = {
+  type options = {
+    delayTime?: float,
+    maxDelayTime?: float,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => delayNode = "DelayNode"
+  @get external getDelayTime: delayNode => audioParam = "delayTime"
 }
 
 module OscillatorNode = {
