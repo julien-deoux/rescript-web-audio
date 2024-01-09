@@ -18,6 +18,8 @@ type channelSplitter
 type channelSplitterNode = audioNode<channelSplitter>
 type constantSource
 type constantSourceNode = audioScheduledSourceNode<constantSource>
+type convolver
+type convolverNode = audioNode<convolver>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -334,6 +336,22 @@ module ConstantSourceNode = {
   @new
   external make: (audioContext, ~options: options=?) => constantSourceNode = "ConstantSourceNode"
   @get external getOffset: constantSourceNode => audioParam = "offset"
+}
+
+module ConvolverNode = {
+  type options = {
+    buffer?: audioBuffer,
+    disableNormalization?: bool,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new
+  external make: (audioContext, ~options: options=?) => convolverNode = "ConvolverNode"
+  @get external getBuffer: convolverNode => audioBuffer = "buffer"
+  @set external setBuffer: (convolverNode, audioBuffer) => unit = "buffer"
+  @get external getNormalize: convolverNode => bool = "normalize"
+  @set external setNormalize: (convolverNode, bool) => unit = "normalize"
 }
 
 module OscillatorNode = {
