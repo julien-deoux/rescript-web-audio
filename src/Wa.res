@@ -119,8 +119,6 @@ module AudioBufferSourceNode = {
   @set
   external setBuffer: (audioBufferSourceNode, option<audioBuffer>) => unit = "buffer"
   @get external getDetune: audioBufferSourceNode => audioParam = "detune"
-  @set
-  external setDetune: (audioBufferSourceNode, audioParam) => unit = "detune"
   @get external getLoop: audioBufferSourceNode => bool = "loop"
   @set
   external setLoop: (audioBufferSourceNode, bool) => unit = "loop"
@@ -131,8 +129,6 @@ module AudioBufferSourceNode = {
   @set
   external setLoopEnd: (audioBufferSourceNode, option<float>) => unit = "loopEnd"
   @get external getPlaybackRate: audioBufferSourceNode => audioParam = "playbackRate"
-  @set
-  external setPlaybackRate: (audioBufferSourceNode, audioParam) => unit = "playbackRate"
   @send
   external start: (
     audioBufferSourceNode,
@@ -291,17 +287,11 @@ module BiquadFilterNode = {
   @new external make: (audioContext, ~options: options=?) => biquadFilterNode = "BiquadFilterNode"
   @get
   external getFrequency: biquadFilterNode => audioParam = "frequency"
-  @set
-  external setFrequency: (biquadFilterNode, audioParam) => unit = "frequency"
   @get external getDetune: biquadFilterNode => audioParam = "detune"
-  @set
-  external setDetune: (biquadFilterNode, audioParam) => unit = "detune"
   @get external getQ: biquadFilterNode => audioParam = "Q"
-  @set external setQ: (biquadFilterNode, audioParam) => unit = "Q"
   @get external getType: biquadFilterNode => type_ = "type"
   @set external setType: (biquadFilterNode, type_) => unit = "type"
   @get external getGain: biquadFilterNode => audioParam = "gain"
-  @set external setGain: (biquadFilterNode, audioParam) => unit = "gain"
   @send
   external getFrequencyResponse: (
     Js.TypedArray2.Float32Array.t,
@@ -378,17 +368,12 @@ module OscillatorNode = {
   @get external getType: oscillatorNode => type_ = "type"
   @set external setType: (oscillatorNode, type_) => unit = "type"
   @get external getDetune: oscillatorNode => audioParam = "detune"
-  @set
-  external setDetune: (oscillatorNode, audioParam) => unit = "detune"
   @get
   external getFrequency: oscillatorNode => audioParam = "frequency"
-  @set
-  external setFrequency: (oscillatorNode, audioParam) => unit = "frequency"
 }
 
 module GainNode = {
   type options = {gain?: float}
   @new external make: (audioContext, ~options: options=?) => gainNode = "GainNode"
   @get external getGain: gainNode => audioParam = "gain"
-  @set external setGain: (gainNode, audioParam) => unit = "gain"
 }
