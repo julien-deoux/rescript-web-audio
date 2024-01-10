@@ -1,4 +1,3 @@
-type event<'target>
 type audioBuffer
 type audioParam
 type audioNode<'a>
@@ -172,7 +171,7 @@ module AudioContext = {
   @send external resume: audioContext => unit = "resume"
   @send external suspend: audioContext => unit = "suspend"
   @send
-  external onSinkchange: (audioContext, @as("sinkchange") _, event<audioContext> => unit) => unit =
+  external onSinkchange: (audioContext, @as("sinkchange") _, Dom.event => unit) => unit =
     "addEventListener"
 }
 
@@ -243,11 +242,8 @@ module AudioScheduledSourceNode = {
   @send external start: (audioScheduledSourceNode<'a>, ~when_: float=?) => unit = "start"
   @send external stop: (audioScheduledSourceNode<'a>, ~when_: float=?) => unit = "stop"
   @send
-  external onEnded: (
-    audioScheduledSourceNode<'a>,
-    @as("ended") _,
-    event<audioScheduledSourceNode<'a>> => unit,
-  ) => unit = "addEventListener"
+  external onEnded: (audioScheduledSourceNode<'a>, @as("ended") _, Dom.event => unit) => unit =
+    "addEventListener"
 }
 
 module BaseAudioContext = {
@@ -263,11 +259,8 @@ module BaseAudioContext = {
     Js.TypedArray2.ArrayBuffer.t,
   ) => promise<audioBuffer> = "decodeAudioData"
   @send
-  external onStateChange: (
-    baseAudioContext<'a>,
-    @as("statechange") _,
-    event<baseAudioContext<'a>> => unit,
-  ) => unit = "addEventListener"
+  external onStateChange: (baseAudioContext<'a>, @as("statechange") _, Dom.event => unit) => unit =
+    "addEventListener"
 }
 
 module BiquadFilterNode = {
