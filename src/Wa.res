@@ -24,10 +24,10 @@ type delay
 type delayNode = audioNode<delay>
 type dynamicsCompressor
 type dynamicsCompressorNode = audioNode<dynamicsCompressor>
-type oscillator
-type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
 type gainNode = audioNode<gain>
+type oscillator
+type oscillatorNode = audioScheduledSourceNode<oscillator>
 type baseAudioContext<'a>
 type online
 type audioContext = baseAudioContext<online>
@@ -377,6 +377,17 @@ module DynamicsCompressorNode = {
   @get external getReduction: dynamicsCompressorNode => float = "reduction"
 }
 
+module GainNode = {
+  type options = {
+    gain?: float,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => gainNode = "GainNode"
+  @get external getGain: gainNode => audioParam = "gain"
+}
+
 module OscillatorNode = {
   type type_ = [#sine | #square | #sawtooth | #triangle | #custom]
   type options = {
@@ -391,10 +402,4 @@ module OscillatorNode = {
   @get external getDetune: oscillatorNode => audioParam = "detune"
   @get
   external getFrequency: oscillatorNode => audioParam = "frequency"
-}
-
-module GainNode = {
-  type options = {gain?: float}
-  @new external make: (audioContext, ~options: options=?) => gainNode = "GainNode"
-  @get external getGain: gainNode => audioParam = "gain"
 }
