@@ -28,6 +28,8 @@ type gain
 type gainNode = audioNode<gain>
 type iirFilter
 type iirFilterNode = audioNode<iirFilter>
+type mediaElementAudioSource
+type mediaElementAudioSourceNode = audioNode<mediaElementAudioSource>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type baseAudioContext<'a>
@@ -407,6 +409,20 @@ module IIRFilterNode = {
     Js.TypedArray2.Float32Array.t,
     Js.TypedArray2.Float32Array.t,
   ) => unit = "getFrequencyResponse"
+}
+
+module MediaElementAudioSourceNode = {
+  type options = {
+    mediaElement: Dom.htmlMediaElement,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new
+  external make: (audioContext, ~options: options) => mediaElementAudioSourceNode =
+    "MediaElementAudioSourceNode"
+  @get
+  external getMediaElement: mediaElementAudioSourceNode => Dom.htmlMediaElement = "mediaElement"
 }
 
 module OscillatorNode = {
