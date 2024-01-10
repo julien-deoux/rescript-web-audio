@@ -26,6 +26,8 @@ type dynamicsCompressor
 type dynamicsCompressorNode = audioNode<dynamicsCompressor>
 type gain
 type gainNode = audioNode<gain>
+type iirFilter
+type iirFilterNode = audioNode<iirFilter>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type baseAudioContext<'a>
@@ -296,10 +298,11 @@ module BiquadFilterNode = {
   @get external getGain: biquadFilterNode => audioParam = "gain"
   @send
   external getFrequencyResponse: (
+    biquadFilterNode,
     Js.TypedArray2.Float32Array.t,
     Js.TypedArray2.Float32Array.t,
     Js.TypedArray2.Float32Array.t,
-  ) => unit = "biquadFilterNode"
+  ) => unit = "getFrequencyResponse"
 }
 
 module ChannelMergerNode = {
@@ -386,6 +389,24 @@ module GainNode = {
   }
   @new external make: (audioContext, ~options: options=?) => gainNode = "GainNode"
   @get external getGain: gainNode => audioParam = "gain"
+}
+
+module IIRFilterNode = {
+  type options = {
+    feedForward: array<float>,
+    feedBack: array<float>,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options) => iirFilterNode = "IIRFilterNode"
+  @send
+  external getFrequencyResponse: (
+    iirFilterNode,
+    Js.TypedArray2.Float32Array.t,
+    Js.TypedArray2.Float32Array.t,
+    Js.TypedArray2.Float32Array.t,
+  ) => unit = "getFrequencyResponse"
 }
 
 module OscillatorNode = {
