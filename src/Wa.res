@@ -22,6 +22,8 @@ type convolver
 type convolverNode = audioNode<convolver>
 type delay
 type delayNode = audioNode<delay>
+type dynamicsCompressor
+type dynamicsCompressorNode = audioNode<dynamicsCompressor>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type gain
@@ -354,6 +356,25 @@ module DelayNode = {
   }
   @new external make: (audioContext, ~options: options=?) => delayNode = "DelayNode"
   @get external getDelayTime: delayNode => audioParam = "delayTime"
+}
+
+module DynamicsCompressorNode = {
+  type options = {
+    attack?: float,
+    knee?: float,
+    ratio?: float,
+    release?: float,
+    threshold?: float,
+  }
+  @new
+  external make: (audioContext, ~options: options=?) => dynamicsCompressorNode =
+    "DynamicsCompressorNode"
+  @get external getAttack: dynamicsCompressorNode => audioParam = "attack"
+  @get external getKnee: dynamicsCompressorNode => audioParam = "knee"
+  @get external getRatio: dynamicsCompressorNode => audioParam = "ratio"
+  @get external getRelease: dynamicsCompressorNode => audioParam = "release"
+  @get external getThreshold: dynamicsCompressorNode => audioParam = "threshold"
+  @get external getReduction: dynamicsCompressorNode => float = "reduction"
 }
 
 module OscillatorNode = {
