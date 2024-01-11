@@ -29,6 +29,8 @@ type iirFilter
 type iirFilterNode = audioNode<iirFilter>
 type mediaElementAudioSource
 type mediaElementAudioSourceNode = audioNode<mediaElementAudioSource>
+type mediaStreamAudioDestination
+type mediaStreamAudioDestinationNode = audioNode<mediaStreamAudioDestination>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type baseAudioContext<'a>
@@ -416,6 +418,19 @@ module MediaElementAudioSourceNode = {
     "MediaElementAudioSourceNode"
   @get
   external getMediaElement: mediaElementAudioSourceNode => Dom.htmlMediaElement = "mediaElement"
+}
+
+module MediaStreamAudioDestinationNode = {
+  type options = {
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new
+  external make: (audioContext, ~options: options=?) => mediaStreamAudioDestinationNode =
+    "MediaStreamAudioDestinationNode"
+  @get external getStream: mediaStreamAudioDestinationNode => Ms.mediaStream = "stream"
+  @set external setStream: (mediaStreamAudioDestinationNode, Ms.mediaStream) => unit = "stream"
 }
 
 module OscillatorNode = {
