@@ -79,12 +79,12 @@ module AnalyserNode = {
 
 module AudioBuffer = {
   type options = {
-    length?: int,
-    numberOfChannels?: int,
-    sampleRate?: float,
-    channelCount?: int,
-    channelCountMode?: channelCountMode,
-    channelInterpretation?: channelInterpretation,
+    length: int,
+    numberOfChannels: int,
+    sampleRate: float,
+    channelCount: int,
+    channelCountMode: channelCountMode,
+    channelInterpretation: channelInterpretation,
   }
   @new external make: options => audioBuffer = "AudioBuffer"
   @get external getSampleRate: audioBuffer => float = "sampleRate"
