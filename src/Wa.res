@@ -448,6 +448,19 @@ module MediaStreamAudioSourceNode = {
   @set external setStream: (mediaStreamAudioSourceNode, Ms.mediaStream) => unit = "stream"
 }
 
+module OfflineAudioContext = {
+  type options = {
+    numberOfChannels: int,
+    length: float,
+    sampleRate: float,
+  }
+  @new
+  external make: options => offlineAudioContext = "OfflineAudioContext"
+  @get external getLength: offlineAudioContext => float = "length"
+  @send external suspend: (offlineAudioContext, float) => promise<unit> = "suspend"
+  @send external startRendering: offlineAudioContext => promise<audioBuffer> = "startRendering"
+}
+
 module OscillatorNode = {
   type type_ = [#sine | #square | #sawtooth | #triangle | #custom]
   type options = {
