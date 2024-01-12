@@ -35,6 +35,8 @@ type mediaStreamAudioSource
 type mediaStreamAudioSourceNode = audioNode<mediaStreamAudioSource>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
+type panner
+type pannerNode = audioNode<panner>
 type baseAudioContext<'a>
 type online
 type audioContext = baseAudioContext<online>
@@ -481,4 +483,51 @@ module OscillatorNode = {
   @get external getType: oscillatorNode => type_ = "type"
   @set external setType: (oscillatorNode, type_) => unit = "type"
   @send external setPeriodicWave: (oscillatorNode, periodicWave) => unit = "setPeriodicWave"
+}
+
+module PannerNode = {
+  type panningModel = [#equalpower | #HRTF]
+  type distanceModel = [#linear | #inverse | #exponential]
+  type options = {
+    panningModel?: panningModel,
+    distanceModel?: distanceModel,
+    positionX?: float,
+    positionY?: float,
+    positionZ?: float,
+    orientationX?: float,
+    orientationY?: float,
+    orientationZ?: float,
+    refDistance?: float,
+    maxDistance?: float,
+    rolloffFactor?: float,
+    coneInnerAngle?: float,
+    coneOuterAngle?: float,
+    coneOuterGain?: float,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @make external make: (audioContext, ~options: options=?) => pannerNode = "PannerNode"
+  @get external getConeInnerAngle: pannerNode => float = "coneInnerAngle"
+  @set external setConeInnerAngle: (pannerNode, float) => unit = "coneInnerAngle"
+  @get external getConeOuterAngle: pannerNode => float = "coneOuterAngle"
+  @set external setConeOuterAngle: (pannerNode, float) => unit = "coneOuterAngle"
+  @get external getConeOuterGain: pannerNode => float = "coneOuterGain"
+  @set external setConeOuterGain: (pannerNode, float) => unit = "coneOuterGain"
+  @get external getDistanceModel: pannerNode => distanceModel = "distanceModel"
+  @set external setDistanceModel: (pannerNode, distanceModel) => unit = "distanceModel"
+  @get external getMaxDistance: pannerNode => float = "maxDistance"
+  @set external setMaxDistance: (pannerNode, float) => unit = "maxDistance"
+  @get external getOrientationX: pannerNode => audioParam = "orientationX"
+  @get external getOrientationY: pannerNode => audioParam = "orientationY"
+  @get external getOrientationZ: pannerNode => audioParam = "orientationZ"
+  @get external getPanningModel: pannerNode => panningModel = "panningModel"
+  @set external setPanningModel: (pannerNode, panningModel) => unit = "panningModel"
+  @get external getPositionX: pannerNode => audioParam = "positionX"
+  @get external getPositionY: pannerNode => audioParam = "positionY"
+  @get external getPositionZ: pannerNode => audioParam = "positionZ"
+  @get external getRefDistance: pannerNode => float = "refDistance"
+  @set external setRefDistance: (pannerNode, float) => unit = "refDistance"
+  @get external getRolloffFactor: pannerNode => float = "rolloffFactor"
+  @set external setRolloffFactor: (pannerNode, float) => unit = "rolloffFactor"
 }
