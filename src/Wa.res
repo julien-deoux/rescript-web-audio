@@ -42,6 +42,7 @@ type offline
 type offlineAudioContext = baseAudioContext<offline>
 type channelCountMode = [#max | #"clamped-max" | #explicit]
 type channelInterpretation = [#speakers | #discrete]
+type periodicWave
 
 module AnalyserNode = {
   type fftSize = [#32 | #64 | #128 | #256 | #512 | #1024 | #2048 | #4096 | #8192 | #16384 | #32768]
@@ -467,12 +468,17 @@ module OscillatorNode = {
     type_?: type_,
     detune?: float,
     frequency?: float,
+    periodicWave?: periodicWave,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
   }
   @new
   external make: (audioContext, ~options: options=?) => oscillatorNode = "OscillatorNode"
-  @get external getType: oscillatorNode => type_ = "type"
-  @set external setType: (oscillatorNode, type_) => unit = "type"
-  @get external getDetune: oscillatorNode => audioParam = "detune"
   @get
   external getFrequency: oscillatorNode => audioParam = "frequency"
+  @get external getDetune: oscillatorNode => audioParam = "detune"
+  @get external getType: oscillatorNode => type_ = "type"
+  @set external setType: (oscillatorNode, type_) => unit = "type"
+  @send external setPeriodicWave: (oscillatorNode, periodicWave) => unit = "setPeriodicWave"
 }
