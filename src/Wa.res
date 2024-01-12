@@ -31,6 +31,8 @@ type mediaElementAudioSource
 type mediaElementAudioSourceNode = audioNode<mediaElementAudioSource>
 type mediaStreamAudioDestination
 type mediaStreamAudioDestinationNode = audioNode<mediaStreamAudioDestination>
+type mediaStreamAudioSource
+type mediaStreamAudioSourceNode = audioNode<mediaStreamAudioSource>
 type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type baseAudioContext<'a>
@@ -431,6 +433,19 @@ module MediaStreamAudioDestinationNode = {
     "MediaStreamAudioDestinationNode"
   @get external getStream: mediaStreamAudioDestinationNode => Ms.mediaStream = "stream"
   @set external setStream: (mediaStreamAudioDestinationNode, Ms.mediaStream) => unit = "stream"
+}
+
+module MediaStreamAudioSourceNode = {
+  type options = {
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new
+  external make: (audioContext, ~options: options=?) => mediaStreamAudioSourceNode =
+    "MediaStreamAudioSourceNode"
+  @get external getStream: mediaStreamAudioSourceNode => Ms.mediaStream = "stream"
+  @set external setStream: (mediaStreamAudioSourceNode, Ms.mediaStream) => unit = "stream"
 }
 
 module OscillatorNode = {
