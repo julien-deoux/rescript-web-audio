@@ -37,6 +37,8 @@ type oscillator
 type oscillatorNode = audioScheduledSourceNode<oscillator>
 type panner
 type pannerNode = audioNode<panner>
+type stereoPanner
+type stereoPannerNode = audioNode<stereoPanner>
 type baseAudioContext<'a>
 type online
 type audioContext = baseAudioContext<online>
@@ -530,4 +532,15 @@ module PannerNode = {
   @set external setRefDistance: (pannerNode, float) => unit = "refDistance"
   @get external getRolloffFactor: pannerNode => float = "rolloffFactor"
   @set external setRolloffFactor: (pannerNode, float) => unit = "rolloffFactor"
+}
+
+module StereoPannerNode = {
+  type options = {
+    pan?: float,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => stereoPannerNode = "StereoPannerNode"
+  @get external getPan: stereoPannerNode => audioParam = "pan"
 }
