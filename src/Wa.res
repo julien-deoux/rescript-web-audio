@@ -39,6 +39,8 @@ type panner
 type pannerNode = audioNode<panner>
 type stereoPanner
 type stereoPannerNode = audioNode<stereoPanner>
+type waveShaper
+type waveShaperNode = audioNode<waveShaper>
 type baseAudioContext<'a>
 type online
 type audioContext = baseAudioContext<online>
@@ -543,4 +545,20 @@ module StereoPannerNode = {
   }
   @new external make: (audioContext, ~options: options=?) => stereoPannerNode = "StereoPannerNode"
   @get external getPan: stereoPannerNode => audioParam = "pan"
+}
+
+module WaveShaperNode = {
+  type oversample = [#none | #"2x" | #"4x"]
+  type options = {
+    curve?: Js.TypedArray2.Float32Array.t,
+    oversample?: oversample,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
+  }
+  @new external make: (audioContext, ~options: options=?) => waveShaperNode = "WaveShaperNode"
+  @get external getCurve: waveShaperNode => option<Js.TypedArray2.Float32Array.t> = "curve"
+  @set external setCurve: (waveShaperNode, option<Js.TypedArray2.Float32Array.t>) => unit = "curve"
+  @get external getOversample: waveShaperNode => oversample = "oversample"
+  @set external setOversample: (waveShaperNode, oversample) => unit = "oversample"
 }
