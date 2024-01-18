@@ -55,14 +55,15 @@ type periodicWave
 module AnalyserNode = {
   type fftSize = [#32 | #64 | #128 | #256 | #512 | #1024 | #2048 | #4096 | #8192 | #16384 | #32768]
   type options = {
+    fftSize?: fftSize,
     maxDecibels?: float,
+    minDecibels?: float,
     smoothingTimeConstant?: float,
     channelCount?: int,
     channelCountMode?: channelCountMode,
     channelInterpretation?: channelInterpretation,
   }
-  @new
-  external make: (audioContext, ~options: options=?) => analyserNode = "AnalyserNode"
+  @new external make: (audioContext, ~options: options=?) => analyserNode = "AnalyserNode"
   @get external getFftSize: analyserNode => fftSize = "fftSize"
   @set external setFftSize: (analyserNode, fftSize) => unit = "fftSize"
   @get external getFrequencyBinCount: analyserNode => int = "frequencyBinCount"
