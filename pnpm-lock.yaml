@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  '@rescript/core':
+    specifier: ^0.6.0
+    version: 0.6.0(rescript@11.0.0-rc.8)
+
 devDependencies:
   rescript:
     specifier: 11.0.0-rc.8
@@ -11,9 +16,16 @@ devDependencies:
 
 packages:
 
+  /@rescript/core@0.6.0(rescript@11.0.0-rc.8):
+    resolution: {integrity: sha512-D4ykxSpbmxbQa99kCg6/DztwCNt1tV3t11BLSOvJPHNLSIuQxfAU3ddgRruaH9LQSKOrMUjxQS9z6RdG5iFPoA==}
+    peerDependencies:
+      rescript: ^10.1.0 || ^11.0.0-alpha.0 || next
+    dependencies:
+      rescript: 11.0.0-rc.8
+    dev: false
+
   /rescript@11.0.0-rc.8:
     resolution: {integrity: sha512-KFeCeJ2tYtmSLD24o0WtWr7YLO22DflCWL31/L9Q8HGdHTLEhDNa+R0tnoyZ8B6wwm6bpNG8xosu1H4O+o7LGA==}
     engines: {node: '>=10'}
     hasBin: true
     requiresBuild: true
-    dev: true

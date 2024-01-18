@@ -1,3 +1,5 @@
+open RescriptCore
+
 type audioBuffer
 type audioParam
 type audioNode<'a>
@@ -71,17 +73,13 @@ module AnalyserNode = {
   @get external getSmoothingTimeConstant: analyserNode => float = "smoothingTimeConstant"
   @set external setSmoothingTimeConstant: (analyserNode, float) => unit = "smoothingTimeConstant"
   @send
-  external getFloatFrequencyData: (analyserNode, Js.TypedArray2.Float32Array.t) => unit =
-    "getFloatFrequencyData"
+  external getFloatFrequencyData: (analyserNode, Float32Array.t) => unit = "getFloatFrequencyData"
   @send
-  external getByteFrequencyData: (analyserNode, Js.TypedArray2.Uint8Array.t) => unit =
-    "getByteFrequencyData"
+  external getByteFrequencyData: (analyserNode, Uint8Array.t) => unit = "getByteFrequencyData"
   @send
-  external getFloatTimeDomainData: (analyserNode, Js.TypedArray2.Float32Array.t) => unit =
-    "getFloatTimeDomainData"
+  external getFloatTimeDomainData: (analyserNode, Float32Array.t) => unit = "getFloatTimeDomainData"
   @send
-  external getByteTimeDomainData: (analyserNode, Js.TypedArray2.Uint8Array.t) => unit =
-    "getByteTimeDomainData"
+  external getByteTimeDomainData: (analyserNode, Uint8Array.t) => unit = "getByteTimeDomainData"
 }
 
 module AudioBuffer = {
@@ -99,21 +97,13 @@ module AudioBuffer = {
   @get external getDuration: audioBuffer => float = "duration"
   @get external getNumberOfChannels: audioBuffer => int = "numberOfChannels"
   @send
-  external getChannelData: (analyserNode, int) => Js.TypedArray2.Float32Array.t = "getChannelData"
+  external getChannelData: (analyserNode, int) => Float32Array.t = "getChannelData"
   @send
-  external copyFromChannel: (
-    analyserNode,
-    Js.TypedArray2.Float32Array.t,
-    int,
-    ~startInChannel: int=?,
-  ) => unit = "copyFromChannel"
+  external copyFromChannel: (analyserNode, Float32Array.t, int, ~startInChannel: int=?) => unit =
+    "copyFromChannel"
   @send
-  external copyToChannel: (
-    analyserNode,
-    Js.TypedArray2.Float32Array.t,
-    int,
-    ~startInChannel: int=?,
-  ) => unit = "copyToChannel"
+  external copyToChannel: (analyserNode, Float32Array.t, int, ~startInChannel: int=?) => unit =
+    "copyToChannel"
 }
 
 module AudioBufferSourceNode = {
@@ -265,10 +255,8 @@ module BaseAudioContext = {
   @send external createOscillator: baseAudioContext<'a> => oscillatorNode = "createOscillator"
   @send external createGain: baseAudioContext<'a> => gainNode = "createGain"
   @send
-  external decodeAudioData: (
-    baseAudioContext<'a>,
-    Js.TypedArray2.ArrayBuffer.t,
-  ) => promise<audioBuffer> = "decodeAudioData"
+  external decodeAudioData: (baseAudioContext<'a>, ArrayBuffer.t) => promise<audioBuffer> =
+    "decodeAudioData"
   @send
   external onStateChange: (baseAudioContext<'a>, @as("statechange") _, Dom.event => unit) => unit =
     "addEventListener"
@@ -305,9 +293,9 @@ module BiquadFilterNode = {
   @send
   external getFrequencyResponse: (
     biquadFilterNode,
-    Js.TypedArray2.Float32Array.t,
-    Js.TypedArray2.Float32Array.t,
-    Js.TypedArray2.Float32Array.t,
+    Float32Array.t,
+    Float32Array.t,
+    Float32Array.t,
   ) => unit = "getFrequencyResponse"
 }
 
@@ -409,9 +397,9 @@ module IIRFilterNode = {
   @send
   external getFrequencyResponse: (
     iirFilterNode,
-    Js.TypedArray2.Float32Array.t,
-    Js.TypedArray2.Float32Array.t,
-    Js.TypedArray2.Float32Array.t,
+    Float32Array.t,
+    Float32Array.t,
+    Float32Array.t,
   ) => unit = "getFrequencyResponse"
 }
 
@@ -550,15 +538,15 @@ module StereoPannerNode = {
 module WaveShaperNode = {
   type oversample = [#none | #"2x" | #"4x"]
   type options = {
-    curve?: Js.TypedArray2.Float32Array.t,
+    curve?: Float32Array.t,
     oversample?: oversample,
     channelCount?: int,
     channelCountMode?: channelCountMode,
     channelInterpretation?: channelInterpretation,
   }
   @new external make: (audioContext, ~options: options=?) => waveShaperNode = "WaveShaperNode"
-  @get external getCurve: waveShaperNode => option<Js.TypedArray2.Float32Array.t> = "curve"
-  @set external setCurve: (waveShaperNode, option<Js.TypedArray2.Float32Array.t>) => unit = "curve"
+  @get external getCurve: waveShaperNode => option<Float32Array.t> = "curve"
+  @set external setCurve: (waveShaperNode, option<Float32Array.t>) => unit = "curve"
   @get external getOversample: waveShaperNode => oversample = "oversample"
   @set external setOversample: (waveShaperNode, oversample) => unit = "oversample"
 }

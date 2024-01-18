@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "rescript": "11.0.0-rc.8"
+  },
+  "dependencies": {
+    "@rescript/core": "^0.6.0"
   }
 }
