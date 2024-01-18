@@ -9,9 +9,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "rescript": "11.0.0-rc.8"
+    "@rescript/core": "^0.6.0",
+    "rescript": "^11.0.0"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@rescript/core": "^0.6.0"
   }
 }
