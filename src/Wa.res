@@ -86,24 +86,45 @@ module AnalyserNode = {
 module AudioBuffer = {
   type options = {
     length: int,
-    numberOfChannels: int,
     sampleRate: float,
-    channelCount: int,
-    channelCountMode: channelCountMode,
-    channelInterpretation: channelInterpretation,
+    numberOfChannels?: int,
+    channelCount?: int,
+    channelCountMode?: channelCountMode,
+    channelInterpretation?: channelInterpretation,
   }
-  @new external make: options => audioBuffer = "AudioBuffer"
+
+  /**
+  Could throw `NotSupportedError` or `RangeError`
+  (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer/AudioBuffer])
+  ```res example
+  Wa.AudioBuffer.make({ length: 4096, sampleRate: 44100.0 })
+  ```
+  */
+  @new
+  external make: options => audioBuffer = "AudioBuffer"
+
   @get external getSampleRate: audioBuffer => float = "sampleRate"
   @get external getLength: audioBuffer => int = "length"
   @get external getDuration: audioBuffer => float = "duration"
   @get external getNumberOfChannels: audioBuffer => int = "numberOfChannels"
+  @send external getChannelData: (audioBuffer, int) => Float32Array.t = "getChannelData"
+
+  /**
+  Could throw `IndexSizeError`
+  (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer/copyFromChannel])
+  ```res example
+  let buffer = Wa.AudioBuffer.make(...)
+  let length = Wa.AudioBuffer.getLength(buffer)
+  let arr = Float32Array.fromLength(length)
+  Wa.AudioBuffer.copyFromChannel(arr, arr, 0)
+  ```
+  */
   @send
-  external getChannelData: (analyserNode, int) => Float32Array.t = "getChannelData"
-  @send
-  external copyFromChannel: (analyserNode, Float32Array.t, int, ~startInChannel: int=?) => unit =
+  external copyFromChannel: (audioBuffer, Float32Array.t, int, ~startInChannel: int=?) => unit =
     "copyFromChannel"
+
   @send
-  external copyToChannel: (analyserNode, Float32Array.t, int, ~startInChannel: int=?) => unit =
+  external copyToChannel: (audioBuffer, Float32Array.t, int, ~startInChannel: int=?) => unit =
     "copyToChannel"
 }
 
