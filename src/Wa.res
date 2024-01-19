@@ -96,9 +96,6 @@ module AudioBuffer = {
   /**
   Could throw `NotSupportedError` or `RangeError`
   (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer/AudioBuffer])
-  ```res example
-  Wa.AudioBuffer.make({ length: 4096, sampleRate: 44100.0 })
-  ```
   */
   @new
   external make: options => audioBuffer = "AudioBuffer"
@@ -112,12 +109,6 @@ module AudioBuffer = {
   /**
   Could throw `IndexSizeError`
   (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioBuffer/copyFromChannel])
-  ```res example
-  let buffer = Wa.AudioBuffer.make(...)
-  let length = Wa.AudioBuffer.getLength(buffer)
-  let arr = Float32Array.fromLength(length)
-  Wa.AudioBuffer.copyFromChannel(arr, arr, 0)
-  ```
   */
   @send
   external copyFromChannel: (audioBuffer, Float32Array.t, int, ~startInChannel: int=?) => unit =
@@ -144,19 +135,20 @@ module AudioBufferSourceNode = {
   external make: (audioContext, ~options: options=?) => audioBufferSourceNode =
     "AudioBufferSourceNode"
   @get external getBuffer: audioBufferSourceNode => option<audioBuffer> = "buffer"
-  @set
-  external setBuffer: (audioBufferSourceNode, option<audioBuffer>) => unit = "buffer"
+  @set external setBuffer: (audioBufferSourceNode, option<audioBuffer>) => unit = "buffer"
   @get external getDetune: audioBufferSourceNode => audioParam = "detune"
   @get external getLoop: audioBufferSourceNode => bool = "loop"
-  @set
-  external setLoop: (audioBufferSourceNode, bool) => unit = "loop"
-  @get external getLoopStart: audioBufferSourceNode => option<float> = "loopStart"
-  @set
-  external setLoopStart: (audioBufferSourceNode, option<float>) => unit = "loopStart"
-  @get external getLoopEnd: audioBufferSourceNode => option<float> = "loopEnd"
-  @set
-  external setLoopEnd: (audioBufferSourceNode, option<float>) => unit = "loopEnd"
+  @set external setLoop: (audioBufferSourceNode, bool) => unit = "loop"
+  @get external getLoopStart: audioBufferSourceNode => float = "loopStart"
+  @set external setLoopStart: (audioBufferSourceNode, float) => unit = "loopStart"
+  @get external getLoopEnd: audioBufferSourceNode => float = "loopEnd"
+  @set external setLoopEnd: (audioBufferSourceNode, float) => unit = "loopEnd"
   @get external getPlaybackRate: audioBufferSourceNode => audioParam = "playbackRate"
+
+  /**
+  Could throw `TypeError` or `InvalidStateError`
+  (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioBufferSourceNode/start])
+  */
   @send
   external start: (
     audioBufferSourceNode,
