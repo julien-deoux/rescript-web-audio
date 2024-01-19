@@ -176,15 +176,29 @@ module AudioContext = {
     sampleRate?: float,
     sinkId?: sinkId,
   }
-  @new external make: options => audioContext = "AudioContext"
+
+  /**
+  Could throw `NotSupportedError`
+  (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext])
+  */
+  @new
+  external make: options => audioContext = "AudioContext"
+
   @get external getBaseLatency: audioContext => float = "baseLatency"
   @get external getOutputLatency: audioContext => float = "outputLatency"
   @get external getSinkId: audioContext => sinkId = "sinkId"
-  @send external setSinkId: (audioContext, sinkId) => unit = "setSinkId"
+
+  /**
+  Could throw `InvalidAccessError`, `NotAllowedError` or `NotFoundError`
+  (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/setSinkId])
+  */
+  @send
+  external setSinkId: (audioContext, sinkId) => promise<unit> = "setSinkId"
+
   @send external getOutputTimestamp: audioContext => audioTimestamp = "getOutputTimestamp"
-  @send external close: audioContext => unit = "close"
-  @send external resume: audioContext => unit = "resume"
-  @send external suspend: audioContext => unit = "suspend"
+  @send external close: audioContext => promise<unit> = "close"
+  @send external resume: audioContext => promise<unit> = "resume"
+  @send external suspend: audioContext => promise<unit> = "suspend"
   @send
   external onSinkchange: (audioContext, @as("sinkchange") _, Dom.event => unit) => unit =
     "addEventListener"
