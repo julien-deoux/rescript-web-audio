@@ -182,7 +182,7 @@ module AudioContext = {
   (see [https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext])
   */
   @new
-  external make: options => audioContext = "AudioContext"
+  external make: (~options: options=?) => audioContext = "AudioContext"
 
   @get external getBaseLatency: audioContext => float = "baseLatency"
   @get external getOutputLatency: audioContext => float = "outputLatency"
