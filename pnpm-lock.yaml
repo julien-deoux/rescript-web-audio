@@ -4,27 +4,27 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-devDependencies:
+dependencies:
   '@rescript/core':
-    specifier: ^0.6.0
-    version: 0.6.0(rescript@11.0.0)
+    specifier: ^1.0.0
+    version: 1.0.0(rescript@11.0.1)
   rescript:
-    specifier: 11.0.0
-    version: 11.0.0
+    specifier: ^11.0.1
+    version: 11.0.1
 
 packages:
 
-  /@rescript/core@0.6.0(rescript@11.0.0):
-    resolution: {integrity: sha512-D4ykxSpbmxbQa99kCg6/DztwCNt1tV3t11BLSOvJPHNLSIuQxfAU3ddgRruaH9LQSKOrMUjxQS9z6RdG5iFPoA==}
+  /@rescript/core@1.0.0(rescript@11.0.1):
+    resolution: {integrity: sha512-F5HURYYx8Kp6h1KBiri2nFwGKR16o9/XTCNl2TEWfCwqR+MTzf/lpuPuB6ajnaYytsU0kTUBIFI0DOoLgkDxSg==}
     peerDependencies:
-      rescript: ^10.1.0 || ^11.0.0-alpha.0 || next
+      rescript: '>=11.0.0 || ^11.1.0-rc.2'
     dependencies:
-      rescript: 11.0.0
-    dev: true
+      rescript: 11.0.1
+    dev: false
 
-  /rescript@11.0.0:
-    resolution: {integrity: sha512-uIUwDZZmDUb7ymGkBiiGioxMg8hXh1mze/2k/qhYQcZGgi7PrLHQIW9AksM7gb9WnpjCAvFsA8U2VgC0nA468w==}
+  /rescript@11.0.1:
+    resolution: {integrity: sha512-7T4PRp/d0+CBNnY6PYKffFqo9tGZlvnZpboF/n+8SKS+JZ6VvXJO7W538VPZXf3EYx1COGAWWvkF9e/HgSAqHg==}
     engines: {node: '>=10'}
     hasBin: true
     requiresBuild: true
-    dev: true
+    dev: false

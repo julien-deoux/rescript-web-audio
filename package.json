@@ -1,6 +1,6 @@
 {
   "name": "rescript-web-audio",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "",
   "scripts": {
     "res:dev": "rescript build -w"
@@ -8,11 +8,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@rescript/core": "^0.6.0",
-    "rescript": "^11.0.0"
-  },
-  "peerDependencies": {
-    "@rescript/core": "^0.6.0"
+  "dependencies": {
+    "@rescript/core": "^1.0.0",
+    "rescript": "^11.0.1"
   }
 }
