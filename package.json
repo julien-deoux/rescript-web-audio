@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/julien-deoux/rescript-web-audio"
+    "url": "git+https://github.com/julien-deoux/rescript-web-audio.git"
   },
   "homepage": "https://github.com/julien-deoux/rescript-web-audio",
   "keywords": [],
