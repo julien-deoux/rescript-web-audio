@@ -5,6 +5,11 @@
   "scripts": {
     "res:dev": "rescript build -w"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julien-deoux/rescript-web-audio"
+  },
+  "homepage": "https://github.com/julien-deoux/rescript-web-audio",
   "keywords": [],
   "author": "",
   "license": "ISC",
