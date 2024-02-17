@@ -454,8 +454,9 @@ module MediaStreamAudioDestinationNode = {
   @new
   external make: (audioContext, ~options: options=?) => mediaStreamAudioDestinationNode =
     "MediaStreamAudioDestinationNode"
-  @get external getStream: mediaStreamAudioDestinationNode => Ms.mediaStream = "stream"
-  @set external setStream: (mediaStreamAudioDestinationNode, Ms.mediaStream) => unit = "stream"
+  @get external getStream: mediaStreamAudioDestinationNode => MediaStream.mediaStream = "stream"
+  @set
+  external setStream: (mediaStreamAudioDestinationNode, MediaStream.mediaStream) => unit = "stream"
 }
 
 module MediaStreamAudioSourceNode = {
@@ -467,8 +468,8 @@ module MediaStreamAudioSourceNode = {
   @new
   external make: (audioContext, ~options: options=?) => mediaStreamAudioSourceNode =
     "MediaStreamAudioSourceNode"
-  @get external getStream: mediaStreamAudioSourceNode => Ms.mediaStream = "stream"
-  @set external setStream: (mediaStreamAudioSourceNode, Ms.mediaStream) => unit = "stream"
+  @get external getStream: mediaStreamAudioSourceNode => MediaStream.mediaStream = "stream"
+  @set external setStream: (mediaStreamAudioSourceNode, MediaStream.mediaStream) => unit = "stream"
 }
 
 module OfflineAudioContext = {
