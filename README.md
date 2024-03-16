@@ -1,19 +1,56 @@
 # rescript-web-audio
-Rescript bindings for the Web Audio API
+Zero-cost ReScript bindings for the
+[Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
 
-## Design goals
+## Installation
 
-The goal is to provide as much of the functionality of the JS API with _some_
-degree of extra-safety afforded by Rescript (for instance, using variants when
-the number of options for a specific value is finite).
+```sh
+pnpm install rescript-web-audio
+```
+Then add `rescript-web-audio` to `bs-dependencies` in `rescript.json`.
+```json
+{
+    "name": "my-project",
+    "bs-dependencies": ["@rescript/core", "rescript-web-audio"]
+}
+```
 
-I haven't settled yet on my list of priorities but right now it is as follows:
-- Zero-cost bindings
-- 100% coverage of the API (https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
-- Type safety
-- Error safety
+## Usage
 
-Meaning that some exceptions will be avoided thanks to the type system, but
-some might still be thrown and won't be replaced by option types for now (as it
-would violate priority #1). I hope to be able to document those cases at some
-point but right now this is just a pet project.
+This library is heavily inspired by the design of
+[rescript-webapi](https://github.com/TheSpyder/rescript-webapi) and
+[ocaml-ffmpeg](https://github.com/savonet/ocaml-ffmpeg), which both use
+**phantom types** and **implementation inheritance** to translate an Object
+Oriented API into the functional paradigm of OCaml. Here is an example of what
+it looks like in the wild:
+
+```rescript
+open WebAudio
+
+// Constructors become ModuleName.make().
+let ctx = AudioContext.make()
+
+let osc = OscillatorNode.make(
+  ctx,
+  ~options={
+    // Strings with a finite number of possible values become polymorphic variants.
+    type_: #sine, 
+    frequency: 440.0,
+  },
+)
+
+let gain = GainNode.make(
+  ctx,
+  ~options={
+    gain: 0.3,
+  },
+)
+
+// Methods become functions.
+let _ = OscillatorNode.connectNode(osc, gain)
+
+// Fields become getters (and setters when appropriate).
+let _ = GainNode.connectNode(gain, AudioContext.getDestination(ctx))
+
+OscillatorNode.start(osc)
+```
