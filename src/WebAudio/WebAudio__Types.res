@@ -47,6 +47,8 @@ type _audioContext
 type audioContext = baseAudioContext_like<_audioContext>
 type _offlineAudioContext
 type offlineAudioContext = baseAudioContext_like<_offlineAudioContext>
+type _offlineAudioCompletionEvent
+type offlineAudioCompletionEvent = Dom.event_like<_offlineAudioCompletionEvent>
 type channelCountMode = [#max | #"clamped-max" | #explicit]
 type channelInterpretation = [#speakers | #discrete]
 type periodicWave

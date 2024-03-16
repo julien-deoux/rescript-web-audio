@@ -13,3 +13,9 @@ include WebAudio__BaseAudioContext.Impl({
 @get external getLength: t => float = "length"
 @send external suspend: (t, float) => promise<unit> = "suspend"
 @send external startRendering: t => promise<WebAudio__Types.audioBuffer> = "startRendering"
+@send
+external addCompleteEventListener: (t, @as("complete") _, Dom.event => unit) => unit =
+  "addEventListener"
+@send
+external removeCompleteEventListener: (t, @as("complete") _, Dom.event => unit) => unit =
+  "removeEventListener"
