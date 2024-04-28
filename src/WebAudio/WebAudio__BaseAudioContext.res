@@ -16,9 +16,9 @@ module Impl = (
     RescriptCore.ArrayBuffer.t,
   ) => promise<WebAudio__Types.audioBuffer> = "decodeAudioData"
   @send
-  external addStateChangeEventListener: (T.t, @as("statechange") _, Dom.event => unit) => unit =
+  external addStatechangeEventListener: (T.t, @as("statechange") _, Dom.event => unit) => unit =
     "addEventListener"
   @send
-  external removeStateChangeEventListener: (T.t, @as("statechange") _, Dom.event => unit) => unit =
+  external removeStatechangeEventListener: (T.t, @as("statechange") _, Dom.event => unit) => unit =
     "removeEventListener"
 }
