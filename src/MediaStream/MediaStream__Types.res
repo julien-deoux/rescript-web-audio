@@ -1,0 +1,2 @@
+type mediaStream
+type mediaStreamTrack
