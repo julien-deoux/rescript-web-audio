@@ -1,6 +1,6 @@
 {
   "name": "rescript-web-audio",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Zero-cost bindings for the Web Audio API",
   "scripts": {
     "res:dev": "rescript build -w"
